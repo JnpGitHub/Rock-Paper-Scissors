@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <head>
     <title>Rock Paper Scissors</title>
-    <meta charset="UTF-8"/>
+    <meta charset=`UTF-8`/>
 </head>
 <body>
     <script>
+        function computerPlay() {
+            let computerChoice = Math.floor(Math.random() * 3)
+            if(computerChoice === 0){
+                return `rock`
+            } else if(computerChoice === 1) {
+                return `paper`
+            } else {
+                return `scissors`
+            }
+        }
         
+        function playRound(playerSelection, computerSelection) {
+            if(playerSelection.toLowerCase() === computerSelection){
+                return `You Tied!`
+            } else if(playerSelection.toLowerCase().trim() === `rock`) {
+                return (computerSelection === `scissors` ? `You Win! Rock beats Scissors` : `You Lose. Paper beats Rock`)
+            } else if(playerSelection.toLowerCase().trim() === `paper`) {
+                return (computerSelection === `rock` ? `You Win! Paper beats Rock` : `You Lose. Scissors beats Paper`)
+            } else if(playerSelection.toLowerCase().trim() === `scissors`) {
+                return (computerSelection === `paper` ? `You Win! Scissors beats Paper` : `You Lose. Rock beats Scissors`)
+            } else {
+                return `Invalid Selection - Please pick Rock, Paper, or Scissors`
+            }
+        }
+
+        function game() {
+            let input = prompt(`Make your choice!\nRock, Paper, or Scissors\nExit to quit`).toLowerCase().trim()
+            let computer = ``
+            while(input.toLowerCase().trim() != `exit`) {
+                computer = computerPlay()
+                console.log(`Player: ${input}\nComputer: ${computer}`)
+                console.log(playRound(input, computer))
+                input = prompt(`Make your choice!\nRock, Paper, or Scissors\nExit to quit`).toLowerCase().trim()
+            }
+            console.log(`Game Over! Thank you for playing!`)
+        }
+
+        game()
     </script>
 </body>
 </html>
